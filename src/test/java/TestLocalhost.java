@@ -50,7 +50,7 @@ public class TestLocalhost {
     }
     @Test
     void login(){
-        openConomeLocalhost();  // add this line if running this test individually
+        //openConomeLocalhost();  // add this line if running this test individually
         Assertions.assertEquals(driver.getCurrentUrl(),"https://dev.conome.mk/account/login?ReturnUrl=%2F");
         driver.findElement(By.id("Username")).sendKeys(username);
         driver.findElement(By.id("Password")).sendKeys(password);
@@ -79,5 +79,19 @@ public class TestLocalhost {
         driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
         Assertions.assertTrue(driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]")).isDisplayed());
         System.out.println("");
+    }
+    @Test
+    void createCompany(){
+        openConomeLocalhost();
+        login();
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[1]/a[1]")).click(); // click company
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[1]/div[1]/a[3]")).click();  //create affiliate
+        Assertions.assertEquals(driver.getCurrentUrl(),"https://dev.conome.mk/companies/createbranch");
+        driver.findElement(By.id("NameSQ")).sendKeys("Affiliate Company 195005");
+        driver.findElement(By.id("NameMK")).sendKeys("Организациска единица 195005");
+        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click();
+        Assertions.assertTrue(driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]")).isDisplayed());
+
     }
 }
