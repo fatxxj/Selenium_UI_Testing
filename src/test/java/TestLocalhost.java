@@ -39,6 +39,10 @@ public class TestLocalhost {
         logout();
         Thread.sleep(3000);
         loginNewUser();
+        Thread.sleep(3000);
+        logout();
+        Thread.sleep(3000);
+        login();
     }
 
     @Test
@@ -194,6 +198,18 @@ public class TestLocalhost {
         Assertions.assertEquals(driver.getCurrentUrl(),"https://dev.conome.mk/"); // check if successsful login
         System.out.println("Login is successsful as accountant!");
 
+
+    }
+
+    @Test
+    void createWorker(){
+        Random random = new Random();
+        int num = random.nextInt(90) + 10;
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[5]/a[1]/p[1]")).click(); // click worker iicon
+        Assertions.assertEquals(driver.getCurrentUrl(),"https://dev.conome.mk/employees/index1");
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[5]/div[1]/a[1]")).click(); // click create
+        Assertions.assertEquals(driver.getCurrentUrl(),"https://dev.conome.mk/employees/create");
+        driver.findElement(By.id("Name")).sendKeys("Worker 195005"+num);
 
     }
 }
