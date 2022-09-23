@@ -244,8 +244,8 @@ public class TestLocalhost {
 
     @Test
     void createWorker() throws InterruptedException {
-        openConomeLocalhost();
-        login();
+        //openConomeLocalhost();
+        //login();
         Random random = new Random();
         int num = random.nextInt(900) + 100;
         driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[5]/a[1]/p[1]")).click(); // click worker iicon
@@ -273,6 +273,29 @@ public class TestLocalhost {
         driver.findElement(By.cssSelector("body.desktop-detected.menu-on-top.pace-done.smooth:nth-child(2) header.box-shadow-header:nth-child(3) a:nth-child(4) div:nth-child(1) > span.logo.logo-ipos-white.logo-ipos")).click(); //go to home page
 
     }
+
+    @Test
+    void CreateProduct() throws InterruptedException {
+        Random random = new Random();
+        int num = random.nextInt(900) + 100;
+        openConomeLocalhost();
+        login();
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[6]/a[1]")).click(); // click product
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[6]/div[1]/a[1]")).click(); // click create
+        driver.findElement(By.id("Product_NameSQ")).sendKeys("Product Name "+num);
+        driver.findElement(By.id("Product_NameMK")).sendKeys("Име на производ "+num);
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[2]/form[1]/div[4]/div[1]/div[1]/div[2]/div[5]/div[1]/div[1]/button[1]/div[1]")).click(); // click unit
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[2]/form[1]/div[4]/div[1]/div[1]/div[2]/div[5]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[2]/a[1]")).click(); //select unit
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[2]/form[1]/div[4]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/button[1]/div[1]")).click();//click vat
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[2]/form[1]/div[4]/div[2]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[3]/a[1]")).click(); // select vat
+        driver.findElement(By.id("Product_BuyingPriceWithVat")).sendKeys("100");
+        driver.findElement(By.id("Product_Profit")).sendKeys("22");
+        driver.findElement(By.xpath("//input[@id='test']")).click();
+        driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click(); //accept modal
+        driver.findElement(By.cssSelector("body.desktop-detected.menu-on-top.pace-done.smooth:nth-child(2) header.box-shadow-header:nth-child(3) a:nth-child(4) div:nth-child(1) > span.logo.logo-ipos-white.logo-ipos")).click(); //go to home page
+
+    }
+
 
 
 }
