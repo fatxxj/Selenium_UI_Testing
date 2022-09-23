@@ -325,6 +325,29 @@ public class TestLocalhost {
 
     }
 
+    @Test
+    void CreateSale() throws InterruptedException {
+        Random random = new Random();
+        int num = random.nextInt(900) + 100;
+        openConomeLocalhost();
+        login();
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[8]/a[1]")).click();
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[8]/div[1]/a[1]")).click();
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/button[1]/div[1]")).click();
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[1]/form[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[3]/a[1]")).click();
+        Actions action = new Actions(driver);
+        WebElement element = driver.findElement(By.xpath("//td[contains(text(),'Product Name 278')]"));
+        action.doubleClick(element).perform();
+        driver.findElement(By.id("Qt")).sendKeys("10");
+        driver.findElement(By.id("addSaleDetail")).click();
+        driver.findElement(By.xpath("/html[1]/body[1]/div[6]/div[2]/div[1]/section[1]/div[1]/div[3]/div[1]/div[1]/div[1]/label[9]")).click();
+        driver.findElement(By.id("submitSaveLbl")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[contains(text(),'OK')]")).click(); //accept modal
+        driver.findElement(By.cssSelector("body.desktop-detected.menu-on-top.pace-done.smooth:nth-child(2) header.box-shadow-header:nth-child(3) a:nth-child(4) div:nth-child(1) > span.logo.logo-ipos-white.logo-ipos")).click(); //go to home page
+
+    }
+
 
 
 
