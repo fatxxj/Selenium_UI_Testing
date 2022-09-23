@@ -5,7 +5,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 
 import java.util.Random;
 
@@ -295,6 +297,34 @@ public class TestLocalhost {
         driver.findElement(By.cssSelector("body.desktop-detected.menu-on-top.pace-done.smooth:nth-child(2) header.box-shadow-header:nth-child(3) a:nth-child(4) div:nth-child(1) > span.logo.logo-ipos-white.logo-ipos")).click(); //go to home page
 
     }
+
+    @Test
+    void CreateIncome() throws InterruptedException {
+        Random random = new Random();
+        int num = random.nextInt(900) + 100;
+        openConomeLocalhost();
+        login();
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[7]/a[1]")).click();// click income
+        driver.findElement(By.xpath("//body/div[6]/aside[1]/nav[1]/ul[1]/li[7]/div[1]/a[1]")).click(); // click create
+        driver.findElement(By.id("Income_NoBilling")).sendKeys(""+num);
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/button[1]/div[1]")).click(); // click client
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[3]/div[1]/div[1]/div[1]/form[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[2]/ul[1]/li[2]/a[1]")).click(); // select client
+        driver.findElement(By.id("ShowProduct")).click();
+
+
+        Actions action = new Actions(driver);
+        WebElement element = driver.findElement(By.xpath("//td[contains(text(),'Product Name 278')]"));
+        action.doubleClick(element).perform();
+
+
+        driver.findElement(By.id("Qt")).sendKeys("3");
+        driver.findElement(By.xpath("//input[@id='AddIncome']")).click();
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[1]/div[6]/div[1]/div[1]/label[2]")).click();
+        driver.findElement(By.xpath("//body/div[6]/div[2]/div[1]/section[1]/div[6]/div[1]/div[1]/div[1]/button[1]")).click();
+        driver.findElement(By.cssSelector("body.desktop-detected.menu-on-top.pace-done.smooth:nth-child(2) header.box-shadow-header:nth-child(3) a:nth-child(4) div:nth-child(1) > span.logo.logo-ipos-white.logo-ipos")).click(); //go to home page
+
+    }
+
 
 
 
